@@ -1,10 +1,11 @@
 package nyc.muaadh_melhi_develpoer.my_buzzfeed_game;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +15,14 @@ import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.controller.BuzzFeedAdapter;
 import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.controller.MyListener;
 import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.model.DataModel;
 import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.mygame.PokemonGame;
+import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.supportscreen.Pokemon_Game;
+import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.supportscreen.Result;
 
 public class MainActivity extends AppCompatActivity implements MyListener {
     private List<DataModel> gameList = new ArrayList<>();
     private Random random = new Random();
+    private int score = 0;
+    private ArrayList<String> userAnswer = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +31,15 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycle_View);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
+        for (int i = 0; i < PokemonGame.pokemoneName.length; i++) {
+            userAnswer.clear();
+            userAnswer.add("");
+        }
 
         for (int i = 0; i < PokemonGame.pokemoneName.length; i++) {
             game(i);
 
         }
-
 
 
         BuzzFeedAdapter buzzFeedAdapter = new BuzzFeedAdapter(gameList);
@@ -58,13 +66,11 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                     PokemonGame.pokemoneName[x2],
                     PokemonGame.pokemoneName[x3],
                     PokemonGame.pokemoneName[x4],
-                    PokemonGame.pokemonePic[i]
-
-
-            ));
+                    PokemonGame.pokemonePic[i],
+                    i));
 
         } else {
-            Log.d(TAG, "game:value of  " + i);
+            //Log.d(TAG, "game:value of  " + i);
             game(i);
         }
 
@@ -72,12 +78,37 @@ public class MainActivity extends AppCompatActivity implements MyListener {
     }
 
 
+
     private int getRandom() {
         return random.nextInt(PokemonGame.pokemoneName.length);
     }
 
+
     @Override
-    public void doStuff(String answer) {
-        // getting answer
+    public void onOptionClicked(String userClick, int indexOfAnswer) {
+        //do the compare ....
+        userAnswer.add(userClick);
+        if(userClick.equals(PokemonGame.pokemoneName[indexOfAnswer])){
+            score++;
+        }
+        if(userAnswer.size()==PokemonGame.pokemoneName.length-1){
+            Intent intent=new Intent(this,Result.class);
+            startActivity(intent);
+
+        }
+
+
+
+
+
+      //  Toast.makeText(getApplicationContext(), "score is: " + score, Toast.LENGTH_LONG).show();
+
+//     if(indexOfAnswer==PokemonGame.pokemoneName.length-1){
+//         int imageResult=R.id.image_result;
+//        int image= Picasso.with(getApplicationContext()).load("https://cdn1.recombu.com/media/mobile/Features/PokemonGOTypes/PokemonTypesHero2_w720.jpg").into(imageResult);
+//         //getFragmentManager().beginTransaction().replace(R.id.image_result,image).commit();
+//     }
+
     }
+
 }

@@ -3,7 +3,7 @@ package nyc.muaadh_melhi_develpoer.my_buzzfeed_game.mygame;
 import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.R;
 
 /**
- * Created by c4q on 11/18/17.
+ * Created by Muaadh Melhi on 11/18/17.
  */
 
 public class PokemonGame {
@@ -37,5 +37,4 @@ public class PokemonGame {
             R.drawable.rayquaza,
             R.drawable.squirtle,
     };
-
 }
