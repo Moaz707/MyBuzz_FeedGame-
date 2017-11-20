@@ -70,17 +70,15 @@ public class BuzzFeedViewHolder extends ViewHolder implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-         Toast.makeText(v.getContext(),"button click",Toast.LENGTH_LONG).show();
 
         Button button = (Button) v;
-        Log.e(button.getText().toString(), ""+indexOfAnswer);
+        Log.e(button.getText().toString(), "" + indexOfAnswer);
         listener.onOptionClicked(button.getText().toString(), indexOfAnswer);
 
         answer1.setEnabled(false);
         answer2.setEnabled(false);
         answer3.setEnabled(false);
         answer4.setEnabled(false);
-
 
 
     }

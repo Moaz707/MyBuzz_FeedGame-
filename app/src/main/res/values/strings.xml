@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">My_BuzzFeed_Game</string>
+    <string name="close">Close</string>
 </resources>

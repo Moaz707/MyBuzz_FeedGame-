@@ -1,21 +1,26 @@
 package nyc.muaadh_melhi_develpoer.my_buzzfeed_game;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.zip.Inflater;
 
 import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.controller.BuzzFeedAdapter;
 import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.controller.MyListener;
 import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.model.DataModel;
 import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.mygame.PokemonGame;
-import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.supportscreen.Pokemon_Game;
 import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.supportscreen.Result;
 
 public class MainActivity extends AppCompatActivity implements MyListener {
@@ -23,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements MyListener {
     private Random random = new Random();
     private int score = 0;
     private ArrayList<String> userAnswer = new ArrayList<>();
+    Intent intent;
+    TextView resultAlertText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +53,6 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         buzzFeedAdapter.setListener(this);
         recyclerView.setAdapter(buzzFeedAdapter);
 
-        //buzzFeedAdapter.getGameList().clear();
-        //buzzFeedAdapter.setGameList(gameList);
-        //buzzFeedAdapter.notifyDataSetChanged();
     }
 
     String TAG = "tag";
@@ -70,13 +74,12 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                     i));
 
         } else {
-            //Log.d(TAG, "game:value of  " + i);
+
             game(i);
         }
 
 
     }
-
 
 
     private int getRandom() {
@@ -88,27 +91,40 @@ public class MainActivity extends AppCompatActivity implements MyListener {
     public void onOptionClicked(String userClick, int indexOfAnswer) {
         //do the compare ....
         userAnswer.add(userClick);
-        if(userClick.equals(PokemonGame.pokemoneName[indexOfAnswer])){
+        intent = new Intent(this, Result.class);
+        if (userClick.equals(PokemonGame.pokemoneName[indexOfAnswer])) {
             score++;
-        }
-        if(userAnswer.size()==PokemonGame.pokemoneName.length-1){
-            Intent intent=new Intent(this,Result.class);
-            startActivity(intent);
 
         }
+        if (userAnswer.size() == PokemonGame.pokemoneName.length) {
+
+            //TODO you need create alert dialoge.
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);//we passing our activtiy
+            LayoutInflater inflater = MainActivity.this.getLayoutInflater();
+            builder.setMessage("You are: ");
+            builder.setView(inflater.inflate(R.layout.my_alert_dialog, null, false))
+            .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("https://youtu.be/rg6CiPI6h2g"));
+                    startActivity(intent);
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+            //TODO convert your score and show it to the textView.
+            resultAlertText = dialog.findViewById(R.id.result_alert);
+            String scoreValue = Score.scoreConverter(score);
+            resultAlertText.setText(scoreValue);
 
 
+        }
 
-
-
-      //  Toast.makeText(getApplicationContext(), "score is: " + score, Toast.LENGTH_LONG).show();
-
-//     if(indexOfAnswer==PokemonGame.pokemoneName.length-1){
-//         int imageResult=R.id.image_result;
-//        int image= Picasso.with(getApplicationContext()).load("https://cdn1.recombu.com/media/mobile/Features/PokemonGOTypes/PokemonTypesHero2_w720.jpg").into(imageResult);
-//         //getFragmentManager().beginTransaction().replace(R.id.image_result,image).commit();
-//     }
 
     }
+
 
 }
