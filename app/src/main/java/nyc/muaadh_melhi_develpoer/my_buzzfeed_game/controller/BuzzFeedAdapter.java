@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.MainActivity;
 import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.R;
 import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.model.DataModel;
 import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.views.BuzzFeedViewHolder;

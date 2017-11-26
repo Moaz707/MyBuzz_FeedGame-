@@ -1,4 +1,4 @@
-package nyc.muaadh_melhi_develpoer.my_buzzfeed_game;
+package nyc.muaadh_melhi_develpoer.my_buzzfeed_game.Score;
 
 /**
  * Created by c4q on 11/19/17.
