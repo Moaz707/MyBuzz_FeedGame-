@@ -9,28 +9,36 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.MainActivity;
+import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.activity.MainActivity;
 import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.R;
-import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.mygame.PokemonGame;
+import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.activity.ZombieActivity;
 
 public class Pokemon_Game extends AppCompatActivity implements View.OnClickListener{
-    Button begin;
-    ImageView pokemonImage;
+    Button pokemon,zombie;
+    ImageView gameImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pokemon__game);
-        begin=(Button) findViewById(R.id.play_pokemon);
-        pokemonImage=(ImageView) findViewById(R.id.image_pokemon);
-        begin.setOnClickListener(this);
+        pokemon=(Button) findViewById(R.id.play_pokemon);
+        zombie=(Button) findViewById(R.id.play_zombie);
+        gameImage=(ImageView) findViewById(R.id.image_game);
+        pokemon.setOnClickListener(this);
+        zombie.setOnClickListener(this);
 
-        Picasso.with(this).load(R.drawable.pokemon_challenge).into(pokemonImage);
+        Picasso.with(this).load(R.drawable.quiz).into(gameImage);
     }
 
     @Override
     public void onClick(View v) {
-        Intent intent=new Intent(this,MainActivity.class);
-        startActivity(intent);
+        if(v.getId()==pokemon.getId()){
+            Intent intent=new Intent(this,MainActivity.class);
+            startActivity(intent);
+        }else if (v.getId()==zombie.getId()){
+            Intent intent=new Intent(this,ZombieActivity.class);
+            startActivity(intent);
+        }
+
     }
 }

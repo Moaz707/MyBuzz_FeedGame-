@@ -4,13 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="nyc.muaadh_melhi_develpoer.my_buzzfeed_game.activity.MainActivity">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycle_View"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </android.support.v7.widget.RecyclerView>
+    tools:context="nyc.muaadh_melhi_develpoer.my_buzzfeed_game.activity.ZombieActivity">
 
 </android.support.constraint.ConstraintLayout>

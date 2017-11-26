@@ -1,4 +1,4 @@
-package nyc.muaadh_melhi_develpoer.my_buzzfeed_game;
+package nyc.muaadh_melhi_develpoer.my_buzzfeed_game.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,13 +10,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.zip.Inflater;
 
+import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.R;
+import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.Score.Score;
 import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.controller.BuzzFeedAdapter;
 import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.controller.MyListener;
 import nyc.muaadh_melhi_develpoer.my_buzzfeed_game.model.DataModel;
